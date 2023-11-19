@@ -1,11 +1,11 @@
+/* MovieGrid.css */
+
 .movie-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(5, 1fr); /* Definir 5 columnas */
     gap: 16px;
   }
   
   .movie-card {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px;
+    /* Estilos para cada tarjeta de película */
   }
