@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import MovieGrid from '../src/components/MovieGrid/MoviGrid'
-import axios from 'axios';
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -10,10 +9,11 @@ function App() {
     const fetchMovies = async () => {
       try {
         const apiKey = 'c122c849039f792fd480b3e7aef4721f';
-        const response = await axios.get( 
+        const response = await fetch(
           `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${currentPage}`
         );
-        setMovies(response.data.results);
+        const data = await response.json();
+        setMovies(data.results);
       } catch (error) {
         console.error('Error fetching movies:', error);
       }
