@@ -1,0 +1,44 @@
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Definir 5 columnas */
+    gap: 16px;
+    background-color: #0B032D;
+  }
+  
+  .movie-card {
+    border: 1px solid #F67E7D;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px;
+    padding: 16px;
+    box-shadow: 0 4px 8px #F67E7D;
+    transition: transform 0.3s ease-in-out;
+    color: aliceblue;
+    text-align: center;
+    
+  
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  .movie-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .movie-details {
+    text-align: center;
+  }
+  
+  .movie-details h2 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  .movie-details p {
+    margin: 0;
+    color: #888;
+  }

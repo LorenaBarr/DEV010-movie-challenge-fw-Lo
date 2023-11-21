@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import axios from 'axios';
+import Pagination from '../Pages/Pagination';
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -13,6 +15,7 @@ const MovieList = () => {
           `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&page=${currentPage}`
         );
         setMovies(response.data.results);
+        setTotalPages(response.data.total_pages);
       } catch (error) {
         console.error('Error fetching movies:', error);
       }
@@ -20,6 +23,10 @@ const MovieList = () => {
 
     fetchMovies();
   }, [currentPage]);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div>
@@ -33,7 +40,7 @@ const MovieList = () => {
           </li>
         ))}
       </ul>
-      <button onClick={() => setCurrentPage((prev) => prev + 1)}>Next Page</button>
+      <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </div>
   );
 };
