@@ -4,16 +4,20 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr); /* Definir 5 columnas */
     gap: 16px;
+    background-color: #0B032D;
   }
   
   .movie-card {
-    border: 1px solid #ddd;
+    border: 1px solid #F67E7D;
     border-radius: 8px;
     overflow: hidden;
     margin: 16px;
     padding: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px #F67E7D;
     transition: transform 0.3s ease-in-out;
+    color: aliceblue;
+    text-align: center;
+    
   
     &:hover {
       transform: scale(1.05);

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';  // Asegúrate de importar PropTypes
+import './buttonPage.css';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const maxVisiblePages = 10;  // Establece el número máximo de páginas visibles
@@ -11,7 +12,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const pageNumbers = Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
 
   return (
-    <div>
+    <div id="pagination">
       <button onClick={() => onPageChange(1)} disabled={currentPage === 1}>
         First
       </button>
