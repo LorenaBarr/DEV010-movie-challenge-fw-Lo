@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import MovieGrid from '../src/components/MovieGrid/MovieGrid';
-import Pagination from '../src/components/Pages/Pagination'; // Asegúrate de tener la ruta correcta
+import  { useState, useEffect } from 'react';
+import MovieGrid from './components/MovieGrid/MovieGrid';
+import Pagination from './components/Pages/Pagination'; 
 
 import axios from 'axios';
 

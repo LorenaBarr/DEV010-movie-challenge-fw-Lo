@@ -1,5 +1,3 @@
-/* MovieGrid.css */
-
 .movie-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr); /* Definir 5 columnas */

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import PropTypes from 'prop-types';  // Asegúrate de importar PropTypes
 import './buttonPage.css';
 
