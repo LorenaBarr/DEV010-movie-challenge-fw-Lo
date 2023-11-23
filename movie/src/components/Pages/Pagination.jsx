@@ -1,13 +1,15 @@
 
-import PropTypes from 'prop-types';  // Asegúrate de importar PropTypes
+import PropTypes from 'prop-types';  
 import './buttonPage.css';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  const maxVisiblePages = 10;  // Establece el número máximo de páginas visibles
+  const maxVisiblePages = 10;  
   const halfVisiblePages = Math.floor(maxVisiblePages / 2);
+  // Math.floor se usa para redondear hacia abajo al número entero más cercano
 
   const startPage = Math.max(1, currentPage - halfVisiblePages);
   const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+  // Math.max - Math.min establecen el maximo y minimo de paginas al rededor de la pagina actual
 
   const pageNumbers = Array.from({ length: endPage - startPage + 1 }, (_, index) => startPage + index);
 
@@ -25,6 +27,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
           {number}
         </button>
       ))}
+{/* //disabled se usa para deshabilitar los botones si el usuario está en la primera página */}
 
       <button onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages}>
         Next
