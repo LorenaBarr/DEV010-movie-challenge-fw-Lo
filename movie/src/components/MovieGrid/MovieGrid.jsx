@@ -16,7 +16,7 @@ const MovieGrid = ({ movies }) => {
   );
 };
 
-// Agrega la validación de PropTypes
+//validación de PropTypes
 MovieGrid.propTypes = {
   movies: PropTypes.arrayOf(
     PropTypes.shape({
