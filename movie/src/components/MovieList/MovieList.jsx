@@ -1,7 +1,7 @@
 import  { useState, useEffect } from 'react';
 import axios from 'axios';
 import Pagination from '../Pages/Pagination';
-
+//MovieHome 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +27,7 @@ const MovieList = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-
+// Ubicar este en otro componenete, movieGrid
   return (
     <div>
       <h1>Movies</h1>

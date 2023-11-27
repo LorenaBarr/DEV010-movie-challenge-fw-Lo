@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types'; // Importa PropTypes
 import './MovieGrid.css';
 
+// MovieCard
 const MovieGrid = ({ movies }) => {
   return (
     <div className="movie-grid">
