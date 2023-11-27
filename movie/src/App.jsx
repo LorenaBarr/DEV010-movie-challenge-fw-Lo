@@ -1,7 +1,6 @@
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import MovieGrid from './components/MovieGrid/MovieGrid';
-import Pagination from './components/Pages/Pagination'; 
-
+import Pagination from './components/MoviePages/Pagination';
 import axios from 'axios';
 
 function App() {
