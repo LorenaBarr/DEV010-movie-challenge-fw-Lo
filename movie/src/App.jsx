@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import MovieGrid from './components/MovieGrid/MovieGrid';
 import Pagination from './components/MoviePages/Pagination';
+import MovieSearch from './components/MovieSearch/MovieSearch';
+// import 'App.css';
 import axios from 'axios';
 
 function App() {
@@ -32,6 +34,7 @@ function App() {
   return (
     <div>
       <h1>Movies</h1>
+      <MovieSearch />
       <MovieGrid movies={movies} />
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </div>

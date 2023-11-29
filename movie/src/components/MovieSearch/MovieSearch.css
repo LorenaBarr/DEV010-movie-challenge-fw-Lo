@@ -1,0 +1,12 @@
+.movie-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  select {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
