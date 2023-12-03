@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import MovieGrid from '../MovieGrid/MovieGrid';
+import MovieApiRequests  from '../../services/MovieApiRequests';
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
@@ -8,11 +8,13 @@ const MovieList = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const apiKey = 'c122c849039f792fd480b3e7aef4721f';
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=16`
-        );
-        setMovies(response.data.results || []);
+        const options = {
+          with_genres: 16,
+        };
+        
+        const moviesData = await MovieApiRequests.fetchMovies(options);
+        setMovies(moviesData.results || []);
+         
       } catch (error) {
         console.error('Error fetching movies:', error);
         setMovies([]);
