@@ -1,66 +1,86 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import MovieGrid from '../MovieGrid/MovieGrid';
 import MovieApiRequests from '../../services/MovieApiRequests';
 import './MovieSearch.css';
 
 const MovieSearch = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState('');
-  const [selectedYear, setSelectedYear] = useState('');
-  const [selectedCountry, setSelectedCountry] = useState('');
-  const [sortBy, setSortBy] = useState('popularity.desc');
+  const [selectedGenre, setSelectedGenre] = useState('');
+  const [selectedSort, setSelectedSort] = useState('popularity.desc');
+  const [genres, setGenres] = useState([]);
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchData = async () => {
       try {
-        const options = {
-          with_genres: '16', // ID del género de animación
-          with_original_language: selectedLanguage,
-          primary_release_year: selectedYear,
-          region: selectedCountry,
-          sort_by: sortBy,
-        };
+        const genreOptions = await MovieApiRequests.fetchGenres();
+        const allGenres = [{ id: '', name: 'Todo' }, ...genreOptions];
+        setGenres(allGenres);
 
-        const data = await MovieApiRequests.fetchMovies(options);
-        setMovies(data.results);
+        if (allGenres.length > 0) {
+          setSelectedGenre(allGenres[0].id.toString());
+          const moviesData = await MovieApiRequests.fetchMoviesByGenre(allGenres[0].id, selectedSort);
+          setMovies(moviesData);
+        }
       } catch (error) {
-        console.error('Error fetching movies:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
-    fetchMovies();
-  }, [selectedLanguage, selectedCountry, selectedYear, sortBy]);
+    fetchData();
+  }, [selectedSort]);
+
+  const handleGenreChange = async (genreId) => {
+    try {
+      const moviesData = await MovieApiRequests.fetchMoviesByGenre(genreId, selectedSort);
+      setMovies(moviesData);
+      setSelectedGenre(genreId);
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+    }
+  };
+
+  const handleSortChange = async (sortOption) => {
+    try {
+      const moviesData = await MovieApiRequests.fetchMoviesByGenre(selectedGenre, sortOption);
+      setMovies(moviesData);
+      setSelectedSort(sortOption);
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+    }
+  };
+
+  const handleClearFilters = async () => {
+    try {
+      const moviesData = await MovieApiRequests.fetchMoviesByGenre('', selectedSort);
+      setMovies(moviesData);
+      setSelectedGenre('');
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+    }
+  };
 
   return (
     <div className="movie-search">
-      {/* Dropdown para idiomas */}
-      <select value={selectedLanguage} onChange={(e) => setSelectedLanguage(e.target.value)}>
-        <option value="">Seleccionar idioma</option>
-        {/* Agrega opciones de idiomas si es necesario */}
-      </select>
-
-      {/* Dropdown para años */}
-      <select value={selectedYear} onChange={(e) => setSelectedYear(e.target.value)}>
-        <option value="">Seleccionar año</option>
-        {/* Agrega opciones de años si es necesario */}
-      </select>
-
-      {/* Dropdown para países */}
-      <select value={selectedCountry} onChange={(e) => setSelectedCountry(e.target.value)}>
-        <option value="">Seleccionar país</option>
-        {/* Agrega opciones de países si es necesario */}
+      {/* Dropdown para géneros */}
+      <select value={selectedGenre} onChange={(e) => handleGenreChange(e.target.value)}>
+        {genres.map((genre) => (
+          <option key={genre.id} value={genre.id.toString()}>
+            {genre.name}
+          </option>
+        ))}
       </select>
 
       {/* Dropdown para ordenamiento */}
-      <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+      <select value={selectedSort} onChange={(e) => handleSortChange(e.target.value)}>
         <option value="popularity.desc">Más popular</option>
         <option value="popularity.asc">Menos popular</option>
         <option value="release_date.desc">Fecha de lanzamiento (descendente)</option>
         <option value="release_date.asc">Fecha de lanzamiento (ascendente)</option>
-        <option value="original_title.asc">Título (A-Z)</option>
-        <option value="original_title.desc">Título (Z-A)</option>
         {/* Otras opciones de ordenamiento */}
       </select>
+
+      {/* Botón para limpiar filtros */}
+      <button onClick={handleClearFilters}>Limpiar Filtros</button>
 
       {/* Resultados de películas */}
       <MovieGrid movies={movies} />

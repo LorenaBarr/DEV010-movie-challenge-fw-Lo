@@ -17,11 +17,13 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await MovieApiRequests.fetchMovies({
-          page: currentPage,
-        });
-        setMovies(data.results);
-        setTotalPages(data.total_pages);
+        // Ahora usamos la función fetchMoviesByGenre que toma un genreId como parámetro
+        const genreId = 16; // Puedes cambiar esto según el género seleccionado
+        const data = await MovieApiRequests.fetchMoviesByGenre(genreId, currentPage);
+
+        setMovies(data);
+        // La información de paginación puede variar según la API, ajusta según sea necesario
+        setTotalPages(data.length > 0 ? Math.ceil(data.length / 20) : 1);
       } catch (error) {
         console.error('Error fetching movies:', error);
       }
