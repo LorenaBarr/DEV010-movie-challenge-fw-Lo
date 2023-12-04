@@ -24,6 +24,22 @@ const fetchGenres = async () => {
   }
 };
 
+// const MovieApiRequests = {
+//   fetchMovies: async (options) => {
+//     try {
+//       const response = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
+//         params: {
+//           api_key: apiKey,
+//           ...options,
+//         },
+//       });
+//       return response.data;
+//     } catch (error) {
+//       console.error('Error fetching movies:', error);
+//       throw error;
+//     }
+//   },
+
 export default {
   fetchMoviesByGenre,
   fetchGenres,
