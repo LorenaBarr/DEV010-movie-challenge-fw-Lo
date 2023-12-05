@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">78.57% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>11/14</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>4/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>10/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -106,21 +106,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -128,14 +123,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -145,14 +145,14 @@
 import PropTypes from 'prop-types';
 import './buttonPage.css';
 &nbsp;
-const Pagination = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >({</span> currentPage, totalPages, onPageChange }) =&gt; {</span>
-  const maxVisiblePages = <span class="cstat-no" title="statement not covered" >10;</span>
-  const halfVisiblePages = <span class="cstat-no" title="statement not covered" >Math.floor(maxVisiblePages / 2);</span>
-  const startPage = <span class="cstat-no" title="statement not covered" >Math.max(1, currentPage - halfVisiblePages);</span>
-  const endPage = <span class="cstat-no" title="statement not covered" >Math.min(totalPages, startPage + maxVisiblePages - 1);</span>
-  const pageNumbers = <span class="cstat-no" title="statement not covered" >Array.from({ length: endPage - startPage + 1 }, <span class="fstat-no" title="function not covered" >(_</span>, index) =&gt; <span class="cstat-no" title="statement not covered" >startPage + index)</span>;</span>
+const Pagination = ({ currentPage, totalPages, onPageChange }) =&gt; {
+  const maxVisiblePages = 10;
+  const halfVisiblePages = Math.floor(maxVisiblePages / 2);
+  const startPage = Math.max(1, currentPage - halfVisiblePages);
+  const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+  const pageNumbers = Array.from({ length: endPage - startPage + 1 }, (_, index) =&gt; startPage + index);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;div id="pagination"&gt;
       &lt;button onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >onPageChange(1)}</span> disabled={currentPage === 1}&gt;
         First
@@ -161,20 +161,20 @@ const Pagination = <span class="cstat-no" title="statement not covered" ><span c
         Previous
       &lt;/button&gt;
 &nbsp;
-      {pageNumbers.map(<span class="fstat-no" title="function not covered" >(n</span>umber) =&gt; (
-<span class="cstat-no" title="statement not covered" >        &lt;button key={number} onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >onPageChange(number)}</span> disabled={number === currentPage}&gt;</span>
+      {pageNumbers.map((number) =&gt; (
+        &lt;button key={number} onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >onPageChange(number)}</span> disabled={number === currentPage}&gt;
           {number}
         &lt;/button&gt;
       ))}
 &nbsp;
-      &lt;button onClick={<span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >onPageChange(currentPage + 1)}</span> disabled={currentPage === totalPages}&gt;
+      &lt;button onClick={() =&gt; onPageChange(currentPage + 1)} disabled={currentPage === totalPages}&gt;
         Next
       &lt;/button&gt;
     &lt;/div&gt;
   );
 };
 &nbsp;
-<span class="cstat-no" title="statement not covered" >Pagination.propTypes = {</span>
+Pagination.propTypes = {
   currentPage: PropTypes.number.isRequired,
   totalPages: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired,
@@ -187,7 +187,7 @@ export default Pagination;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-12-04T22:31:59.056Z
+                at 2023-12-05T04:26:09.160Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

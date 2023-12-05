@@ -1,32 +1,37 @@
-import { render, screen } from '@testing-library/react';
-import { mockAxios } from '../utils/testUtils';
+import { render, screen, waitFor } from '@testing-library/react';
+// eslint-disable-next-line no-unused-vars
+import userEvent from '@testing-library/user-event';
 import MovieList from '../components/MovieList/MovieList';
-import axios from 'axios';
+import MovieApiRequests from '../../src/services/MovieApiRequests';
 
-// Simula el módulo 'axios' para que las llamadas a axios sean manejadas por Jest.
-jest.mock('axios');
-// Prueba que renderiza la lista de películas.
-test('renders movie list', async () => {
-  // Simula una llamada a la API utilizando una función mockAxios, proporcionando datos simulados
-  mockAxios({
-    results: [
-      { id: 1, title: 'Movie 1' },
-      { id: 2, title: 'Movie 2' },
-    ],
+// Configura el mock para fetchMovies
+jest.mock('../../src/services/MovieApiRequests', () => ({
+  fetchMovies: jest.fn(),
+}));
+
+const mockMovies = [
+  { id: 1, poster_path: '/path1.jpg', original_title: 'Movie 1', release_date: '2023-01-01' },
+  { id: 2, poster_path: '/path2.jpg', original_title: 'Movie 2', release_date: '2023-01-02' },
+];
+
+describe('MovieList', () => {
+  it('renders MovieList component with movies', async () => {
+    // Configura el mock para fetchMovies
+    MovieApiRequests.fetchMovies.mockResolvedValueOnce({ results: mockMovies });
+
+    // Renderiza el componente MovieList
+    render(<MovieList />);
+
+    // Asegúrate de que se está llamando a fetchMovies
+    expect(MovieApiRequests.fetchMovies).toHaveBeenCalledTimes(1);
+
+    // Espera a que la llamada asincrónica se complete
+    await waitFor(() => {
+      // Asegúrate de que se renderizan las tarjetas de películas
+      expect(screen.getByText('Movie 1')).toBeInTheDocument();
+      expect(screen.getByText('Movie 2')).toBeInTheDocument();
+    });
   });
-  // Renderiza el componente MovieList en un entorno de prueba.
-  render(<MovieList />);
-  // Busca en la pantalla los elementos que contienen los textos 'Movie 1' y 'Movie 2'.
-  const movie1 = await screen.findByText('Movie 1');
-  const movie2 = await screen.findByText('Movie 2');
-  // Asegura que los elementos con los textos 'Movie 1' y 'Movie 2' estén presentes en la pantalla.
-  expect(movie1).toBeInTheDocument();
-  expect(movie2).toBeInTheDocument();
-  // Asegura que la función axios haya sido llamada con la URL correcta al realizar la solicitud.
-  expect(axios).toHaveBeenCalledWith({
-    method: 'get',
-    url: 'https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}',
-  });
+
+  // Agrega más pruebas según sea necesario
 });
-
-
