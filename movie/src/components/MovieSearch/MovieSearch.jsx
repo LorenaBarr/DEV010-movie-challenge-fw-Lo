@@ -27,7 +27,7 @@ const MovieSearch = () => {
     };
 
     fetchData();
-  }, [selectedSort]);
+  }, []);
 
   const handleGenreChange = async (genreId) => {
     try {
@@ -69,6 +69,8 @@ const MovieSearch = () => {
           </option>
         ))}
       </select>
+      {/* Botón para limpiar filtros */}
+      <button onClick={handleClearFilters}>Limpiar Filtro</button>
 
       {/* Dropdown para ordenamiento */}
       <select value={selectedSort} onChange={(e) => handleSortChange(e.target.value)}>
@@ -79,8 +81,7 @@ const MovieSearch = () => {
         {/* Otras opciones de ordenamiento */}
       </select>
 
-      {/* Botón para limpiar filtros */}
-      <button onClick={handleClearFilters}>Limpiar Filtros</button>
+      
 
       {/* Resultados de películas */}
       <MovieGrid movies={movies} />
