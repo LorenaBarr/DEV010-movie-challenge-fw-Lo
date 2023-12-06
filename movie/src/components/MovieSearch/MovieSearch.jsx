@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 import MovieGrid from '../MovieGrid/MovieGrid';
 import MovieApiRequests from '../../services/MovieApiRequests';
 import './MovieSearch.css';
+import PropTypes from 'prop-types';
 
-const MovieSearch = () => {
+const MovieSearch = (props) => {
   const [selectedGenre, setSelectedGenre] = useState('');
   const [selectedSort, setSelectedSort] = useState('popularity.desc');
   const [genres, setGenres] = useState([]);
@@ -19,7 +20,7 @@ const MovieSearch = () => {
         if (allGenres.length > 0) {
           setSelectedGenre(allGenres[0].id.toString());
           const moviesData = await MovieApiRequests.fetchMoviesByGenre(allGenres[0].id, selectedSort);
-          setMovies(moviesData);
+          setMovies(moviesData.results);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -27,13 +28,18 @@ const MovieSearch = () => {
     };
 
     fetchData();
-  }, []);
+  }, [selectedSort]);
 
   const handleGenreChange = async (genreId) => {
     try {
       const moviesData = await MovieApiRequests.fetchMoviesByGenre(genreId, selectedSort);
-      setMovies(moviesData);
+      setMovies(moviesData.results);
       setSelectedGenre(genreId);
+
+      // Se llama a la función proporcionada desde las propiedades para notificar a App.jsx del cambio de género
+      if (genreId) {
+        props.onGenreChange(genreId);
+      }
     } catch (error) {
       console.error('Error fetching movies:', error);
     }
@@ -42,7 +48,7 @@ const MovieSearch = () => {
   const handleSortChange = async (sortOption) => {
     try {
       const moviesData = await MovieApiRequests.fetchMoviesByGenre(selectedGenre, sortOption);
-      setMovies(moviesData);
+      setMovies(moviesData.results);
       setSelectedSort(sortOption);
     } catch (error) {
       console.error('Error fetching movies:', error);
@@ -52,7 +58,7 @@ const MovieSearch = () => {
   const handleClearFilters = async () => {
     try {
       const moviesData = await MovieApiRequests.fetchMoviesByGenre('', selectedSort);
-      setMovies(moviesData);
+      setMovies(moviesData.results);
       setSelectedGenre('');
     } catch (error) {
       console.error('Error fetching movies:', error);
@@ -81,12 +87,14 @@ const MovieSearch = () => {
         {/* Otras opciones de ordenamiento */}
       </select>
 
-      
-
       {/* Resultados de películas */}
       <MovieGrid movies={movies} />
     </div>
   );
+};
+
+MovieSearch.propTypes = {
+  onGenreChange: PropTypes.func.isRequired,
 };
 
 export default MovieSearch;

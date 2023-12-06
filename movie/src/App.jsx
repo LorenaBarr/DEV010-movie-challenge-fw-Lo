@@ -9,37 +9,43 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [selectedGenre, setSelectedGenre] = useState(null);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
+  const handleGenreChange = (genreId) => {
+    // Cuando se selecciona un género, reiniciamos la página a 1 y actualizamos el género seleccionado
+    setCurrentPage(1);
+    setSelectedGenre(genreId);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Ahora usamos la función fetchMoviesByGenre que toma un genreId como parámetro
-        const genreId = 16; // Puedes cambiar esto según el género seleccionado
+        const genreId = ''; // O el género que desees, o deja vacío para obtener todas las películas
         const data = await MovieApiRequests.fetchMoviesByGenre(genreId, currentPage);
-
-        setMovies(data);
-        // La información de paginación puede variar según la API, ajusta según sea necesario
-        setTotalPages(data.length > 0 ? Math.ceil(data.length / 20) : 1);
+  
+        setMovies(data.results);
+        setTotalPages(data.totalPages);
       } catch (error) {
         console.error('Error fetching movies:', error);
       }
     };
-
+  
     fetchData();
   }, [currentPage]);
-
+  
   return (
     <div>
       <h1>Movies</h1>
-      <MovieSearch />
+      <MovieSearch onGenreChange={handleGenreChange} />
       <MovieGrid movies={movies} />
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </div>
   );
 }
+
 
 export default App;
