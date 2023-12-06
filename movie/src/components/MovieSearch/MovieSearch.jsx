@@ -1,10 +1,9 @@
 import  { useState, useEffect } from 'react';
-import MovieGrid from '../MovieGrid/MovieGrid';
-import MovieApiRequests from '../../services/MovieApiRequests';
-import './MovieSearch.css';
 import PropTypes from 'prop-types';
+import MovieApiRequests from '../services/MovieApiRequests';
+import MovieGrid from '../MovieGrid/MovieGrid'
 
-const MovieSearch = (props) => {
+const MovieSearch = () => {
   const [selectedGenre, setSelectedGenre] = useState('');
   const [selectedSort, setSelectedSort] = useState('popularity.desc');
   const [genres, setGenres] = useState([]);
@@ -13,33 +12,23 @@ const MovieSearch = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const genreOptions = await MovieApiRequests.fetchGenres();
-        const allGenres = [{ id: '', name: 'Todo' }, ...genreOptions];
-        setGenres(allGenres);
+        const { genres: genreOptions, movies: moviesData } = await MovieApiRequests.fetchMovies();
 
-        if (allGenres.length > 0) {
-          setSelectedGenre(allGenres[0].id.toString());
-          const moviesData = await MovieApiRequests.fetchMoviesByGenre(allGenres[0].id, selectedSort);
-          setMovies(moviesData.results);
-        }
+        setGenres([{ id: '', name: 'Todo' }, ...genreOptions]);
+        setMovies(moviesData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     fetchData();
-  }, [selectedSort]);
+  }, []);
 
   const handleGenreChange = async (genreId) => {
     try {
-      const moviesData = await MovieApiRequests.fetchMoviesByGenre(genreId, selectedSort);
-      setMovies(moviesData.results);
+      const { movies: moviesData } = await MovieApiRequests.fetchMoviesByGenre(genreId, selectedSort);
+      setMovies(moviesData);
       setSelectedGenre(genreId);
-
-      // Se llama a la función proporcionada desde las propiedades para notificar a App.jsx del cambio de género
-      if (genreId) {
-        props.onGenreChange(genreId);
-      }
     } catch (error) {
       console.error('Error fetching movies:', error);
     }
@@ -47,8 +36,8 @@ const MovieSearch = (props) => {
 
   const handleSortChange = async (sortOption) => {
     try {
-      const moviesData = await MovieApiRequests.fetchMoviesByGenre(selectedGenre, sortOption);
-      setMovies(moviesData.results);
+      const { movies: moviesData } = await MovieApiRequests.fetchMoviesByGenre(selectedGenre, sortOption);
+      setMovies(moviesData);
       setSelectedSort(sortOption);
     } catch (error) {
       console.error('Error fetching movies:', error);
@@ -57,8 +46,8 @@ const MovieSearch = (props) => {
 
   const handleClearFilters = async () => {
     try {
-      const moviesData = await MovieApiRequests.fetchMoviesByGenre('', selectedSort);
-      setMovies(moviesData.results);
+      const { movies: moviesData } = await MovieApiRequests.fetchMoviesByGenre('', selectedSort);
+      setMovies(moviesData);
       setSelectedGenre('');
     } catch (error) {
       console.error('Error fetching movies:', error);
@@ -67,7 +56,6 @@ const MovieSearch = (props) => {
 
   return (
     <div className="movie-search">
-      {/* Dropdown para géneros */}
       <select value={selectedGenre} onChange={(e) => handleGenreChange(e.target.value)}>
         {genres.map((genre) => (
           <option key={genre.id} value={genre.id.toString()}>
@@ -75,19 +63,16 @@ const MovieSearch = (props) => {
           </option>
         ))}
       </select>
-      {/* Botón para limpiar filtros */}
+
       <button onClick={handleClearFilters}>Limpiar Filtro</button>
 
-      {/* Dropdown para ordenamiento */}
       <select value={selectedSort} onChange={(e) => handleSortChange(e.target.value)}>
         <option value="popularity.desc">Más popular</option>
         <option value="popularity.asc">Menos popular</option>
         <option value="release_date.desc">Fecha de lanzamiento (descendente)</option>
         <option value="release_date.asc">Fecha de lanzamiento (ascendente)</option>
-        {/* Otras opciones de ordenamiento */}
       </select>
 
-      {/* Resultados de películas */}
       <MovieGrid movies={movies} />
     </div>
   );

@@ -1,23 +1,27 @@
-import { useState, useEffect } from 'react';
-import MovieGrid from '../MovieGrid/MovieGrid';
-import MovieApiRequests from '../../services/MovieApiRequests';
+import { useEffect, useState } from 'react';
+import MovieApiRequests from '../services/MovieApiRequests';
+import MovieGrid from './MovieGrid';
+
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchMoviesData = async () => {
       try {
-        
-        const moviesData = await MovieApiRequests.fetchMovies();
-        setMovies(moviesData.results || []);
+        await MovieApiRequests.fetchMovies({
+          page: 1,
+          onSuccess: ({ movies: fetchedMovies }) => {
+            setMovies(fetchedMovies);
+          },
+        });
       } catch (error) {
         console.error('Error fetching movies:', error);
         setMovies([]);
       }
     };
 
-    fetchMovies();
+    fetchMoviesData();
   }, []);
 
   return (
