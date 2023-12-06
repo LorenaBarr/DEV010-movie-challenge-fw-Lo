@@ -4,7 +4,7 @@ import MovieApiRequests from '../../services/MovieApiRequests';
 import './MovieSearch.css';
 import PropTypes from 'prop-types';
 
-const MovieSearch = (props) => {
+const MovieSearch = ({ onGenreChange, onMoviesChange }) => {
   const [selectedGenre, setSelectedGenre] = useState('');
   const [selectedSort, setSelectedSort] = useState('popularity.desc');
   const [genres, setGenres] = useState([]);
@@ -21,6 +21,8 @@ const MovieSearch = (props) => {
           setSelectedGenre(allGenres[0].id.toString());
           const moviesData = await MovieApiRequests.fetchMoviesByGenre(allGenres[0].id, selectedSort);
           setMovies(moviesData.results);
+          
+          
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -31,14 +33,17 @@ const MovieSearch = (props) => {
   }, [selectedSort]);
 
   const handleGenreChange = async (genreId) => {
+    console.log(genreId);
     try {
       const moviesData = await MovieApiRequests.fetchMoviesByGenre(genreId, selectedSort);
       setMovies(moviesData.results);
+      onMoviesChange(moviesData.results)
+      console.log(moviesData);
       setSelectedGenre(genreId);
 
       // Se llama a la función proporcionada desde las propiedades para notificar a App.jsx del cambio de género
       if (genreId) {
-        props.onGenreChange(genreId);
+        onGenreChange(genreId);
       }
     } catch (error) {
       console.error('Error fetching movies:', error);
@@ -88,7 +93,7 @@ const MovieSearch = (props) => {
       </select>
 
       {/* Resultados de películas */}
-      <MovieGrid movies={movies} />
+      {/* <MovieGrid movies={movies} /> */}
     </div>
   );
 };

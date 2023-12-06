@@ -13,13 +13,24 @@ function App() {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
+    console.log(page);
   };
 
   const handleGenreChange = (genreId) => {
     // Cuando se selecciona un género, reiniciamos la página a 1 y actualizamos el género seleccionado
     setCurrentPage(1);
     setSelectedGenre(genreId);
+
   };
+
+  const handleMovieChange = (moviesFromSearch) => {
+    if (moviesFromSearch && moviesFromSearch.length ) {
+      setMovies(moviesFromSearch)
+
+    }
+    
+  
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,8 +51,8 @@ function App() {
   return (
     <div>
       <h1>Movies</h1>
-      <MovieSearch onGenreChange={handleGenreChange} />
-      <MovieGrid movies={movies} />
+      <MovieSearch onGenreChange={handleGenreChange} onMoviesChange={handleMovieChange} />
+      <MovieGrid movies={movies}  />
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </div>
   );
