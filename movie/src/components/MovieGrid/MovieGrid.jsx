@@ -1,4 +1,3 @@
-import React from 'react';
 import MovieCard from '../MovieCard/MovieCard';
 import PropTypes from 'prop-types';
 import './MovieGrid.css';

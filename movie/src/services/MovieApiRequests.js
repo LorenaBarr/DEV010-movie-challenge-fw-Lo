@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const apiKey = 'c122c849039f792fd480b3e7aef4721f';
 
-const fetchMoviesByGenre = async (genreId, page) => {
+const fetchMoviesByGenre = async (genreId, sortOption, page) => {
   try {
     const response = await axios.get(
       `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&with_genres=${genreId}&page=${page}`

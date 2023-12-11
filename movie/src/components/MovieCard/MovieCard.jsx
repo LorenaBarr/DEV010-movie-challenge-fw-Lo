@@ -1,4 +1,4 @@
-import React from 'react';
+
 import PropTypes from 'prop-types';
 import './MovieCard.css';
 
@@ -20,6 +20,7 @@ MovieCard.propTypes = {
     poster_path: PropTypes.string.isRequired,
     original_title: PropTypes.string.isRequired,
     release_date: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
   }).isRequired,
 };
 

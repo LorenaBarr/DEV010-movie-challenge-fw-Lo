@@ -4,11 +4,13 @@ import MovieApiRequests from '../../services/MovieApiRequests';
 import './MovieSearch.css';
 import PropTypes from 'prop-types';
 
-const MovieSearch = ({ onGenreChange, onMoviesChange }) => {
+
+const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange }) => {
   const [selectedGenre, setSelectedGenre] = useState('');
   const [selectedSort, setSelectedSort] = useState('popularity.desc');
   const [genres, setGenres] = useState([]);
   const [movies, setMovies] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,7 +21,7 @@ const MovieSearch = ({ onGenreChange, onMoviesChange }) => {
 
         if (allGenres.length > 0) {
           setSelectedGenre(allGenres[0].id.toString());
-          const moviesData = await MovieApiRequests.fetchMoviesByGenre(allGenres[0].id, selectedSort);
+          const moviesData = await MovieApiRequests.fetchMoviesByGenre(allGenres[0].id, selectedSort, currentPage);
           setMovies(moviesData.results);
           
           
@@ -30,16 +32,19 @@ const MovieSearch = ({ onGenreChange, onMoviesChange }) => {
     };
 
     fetchData();
-  }, [selectedSort]);
+  }, [selectedSort, currentPage]);
 
   const handleGenreChange = async (genreId) => {
     console.log(genreId);
     try {
-      const moviesData = await MovieApiRequests.fetchMoviesByGenre(genreId, selectedSort);
+      const moviesData = await MovieApiRequests.fetchMoviesByGenre(genreId, selectedSort, currentPage);
       setMovies(moviesData.results);
       onMoviesChange(moviesData.results)
       console.log(moviesData);
       setSelectedGenre(genreId);
+      setSelectedSort(sortOption);
+      onSortChange(sortOption);
+      setCurrentPage(1);
 
       // Se llama a la función proporcionada desde las propiedades para notificar a App.jsx del cambio de género
       if (genreId) {

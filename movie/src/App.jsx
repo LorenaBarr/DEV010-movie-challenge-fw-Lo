@@ -10,9 +10,11 @@ function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [selectedGenre, setSelectedGenre] = useState(null);
+  const [sortOption, setSortOption] = useState('popularity.desc');
 
-  const handlePageChange = (page) => {
+  const handlePageChange = (page, sortOption) => {
     setCurrentPage(page);
+    setSortOption(sortOption);
     console.log(page);
   };
 
@@ -31,12 +33,15 @@ function App() {
     
   
   }
+  const handleSortChange = (sortOption) => {
+    setSortOption(sortOption);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const genreId = ''; // O el género que desees, o deja vacío para obtener todas las películas
-        const data = await MovieApiRequests.fetchMoviesByGenre(genreId, currentPage);
+        const data = await MovieApiRequests.fetchMoviesByGenre(genreId, currentPage, sortOption );
   
         setMovies(data.results);
         setTotalPages(data.totalPages);
@@ -46,12 +51,12 @@ function App() {
     };
   
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, sortOption]);
   
   return (
     <div>
       <h1>Movies</h1>
-      <MovieSearch onGenreChange={handleGenreChange} onMoviesChange={handleMovieChange} />
+      <MovieSearch onGenreChange={handleGenreChange} onMoviesChange={handleMovieChange} onSortChange={handleSortChange} />
       <MovieGrid movies={movies}  />
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </div>
