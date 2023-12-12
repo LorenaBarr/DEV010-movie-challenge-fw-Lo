@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // Recibimos como props las funciones onGenreChange, onMoviesChange y onSortChange que se encargan de actualizar
 // el estado y los datos del componente padre App
 
-const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange }) => {
+const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange, currentPage }) => {
   const [selectedGenre, setSelectedGenre] = useState('');
   // Definimos el estado local del componente con los hooks useState
   // selectedGenre es una cadena que almacena el id del género seleccionado
@@ -18,11 +18,11 @@ const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange }) => {
   const [genres, setGenres] = useState([]);
   // genres es un array que almacena las opciones de género disponibles
   // setGenres es una función que permite actualizar el estado de genres
-  const [movies, setMovies] = useState([]);
+  // const [movies, setMovies] = useState([]);
    // movies es un array que almacena las películas obtenidas de la API según el género y la ordenación seleccionados
   // setMovies es una función que permite actualizar el estado de movies
   //aunque este lo cambie por onMoviesChange
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
   // currentPage es un número que almacena la página actual de la paginación
   // setCurrentPage es una función que permite actualizar el estado de currentPage
 
@@ -52,7 +52,7 @@ const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange }) => {
            // Actualizamos el estado de selectedGenre con el id del 
            //primer elemento de allGenres, convertido a cadena
           const moviesData = await MovieApiRequests.fetchMoviesByGenre(allGenres[0].id, selectedSort, currentPage);
-          setMovies(moviesData.results);
+          onMoviesChange(moviesData.results);
            // Llamamos a la función fetchMoviesByGenre del módulo MovieApiRequests
           // Le pasamos como argumentos el id del primer elemento de allGenres, la opción de ordenación seleccionada y la página actual
           // Esperamos a que se resuelva la promesa y guardamos el resultado en la variable moviesData
@@ -75,7 +75,7 @@ const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange }) => {
        // Llamamos a la función fetchMoviesByGenre del módulo MovieApiRequests
       const moviesData = await MovieApiRequests.fetchMoviesByGenre(genreId, selectedSort, currentPage);
        // Le pasamos como argumentos el id del género seleccionado, la opción de ordenación seleccionada y la página actual
-      setMovies(moviesData.results);
+      onMoviesChange(moviesData.results);
       // Esperamos a que se resuelva la promesa y guardamos el resultado en la variable moviesData
       // Actualizamos el estado de movies con el array de resultados que viene en moviesData
       onMoviesChange(moviesData.results);
@@ -105,7 +105,7 @@ const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange }) => {
       // Llamamos a la función fetchMoviesByGenre del módulo MovieApiRequests
       // Le pasamos como argumentos el id del género seleccionado, la opción de ordenación seleccionada y la página actual
       // Esperamos a que se resuelva la promesa y guardamos el resultado en la variable moviesData
-      setMovies(moviesData.results);
+      onMoviesChange(moviesData.results);
        // Actualizamos el estado de movies con el array de resultados que viene en moviesData, el problema debe estar en movie y setmovies, ya que se cambio a onMoviesChange
       setSelectedSort(sortOption);
        // Actualizamos el estado de selectedSort con el valor del parámetro
@@ -125,7 +125,7 @@ const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange }) => {
       // Le pasamos como argumentos una cadena vacía para indicar que no hay ningún género seleccionado, la opción de ordenación seleccionada y la página actual
       // Esperamos a que se resuelva la promesa y guardamos el resultado en la variable moviesData
       const moviesData = await MovieApiRequests.fetchMoviesByGenre('', selectedSort, currentPage);
-      setMovies(moviesData.results);
+      onMoviesChange(moviesData.results);
       // Actualizamos el estado de movies con el array de resultados que viene en moviesData
         // Actualizamos el estado de selectedGenre con una cadena vacía para indicar que no hay ningún género seleccionado
       setSelectedGenre('');
@@ -175,6 +175,7 @@ MovieSearch.propTypes = {
   onSortChange: PropTypes.func.isRequired,
   // onSortChange es una función que se encarga de actualizar el estado y los datos del 
   //componente padre App según la opción de ordenación seleccionada
+  currentPage: PropTypes.number.isRequired
 };
 
 export default MovieSearch;

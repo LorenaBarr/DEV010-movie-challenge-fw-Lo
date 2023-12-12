@@ -81,6 +81,7 @@ function App() {
         onMoviesChange={setMovies}  
          // Pasamos la función setMovies como prop al componente MovieSearch
         onSortChange={handleSortChange}
+        currentPage={currentPage}
         // Pasamos la función handleSortChange como prop al componente MovieSearch
         // Pasamos el estado movies como prop al componente MovieGrid
       /> 
