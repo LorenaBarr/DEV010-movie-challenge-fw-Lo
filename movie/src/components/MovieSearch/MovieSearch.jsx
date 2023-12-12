@@ -1,9 +1,8 @@
-import  { useState, useEffect } from 'react';
-import MovieGrid from '../MovieGrid/MovieGrid';
-import MovieApiRequests from '../../services/MovieApiRequests';
-import './MovieSearch.css';
-import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
 
+import MovieApiRequests from '../../services/MovieApiRequests'
+import './MovieSearch.css'
+import PropTypes from 'prop-types';
 
 const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange }) => {
   const [selectedGenre, setSelectedGenre] = useState('');
@@ -23,8 +22,6 @@ const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange }) => {
           setSelectedGenre(allGenres[0].id.toString());
           const moviesData = await MovieApiRequests.fetchMoviesByGenre(allGenres[0].id, selectedSort, currentPage);
           setMovies(moviesData.results);
-          
-          
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -32,21 +29,15 @@ const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange }) => {
     };
 
     fetchData();
-  }, [selectedSort, currentPage]);
+  }, [currentPage, selectedSort]);
 
   const handleGenreChange = async (genreId) => {
-    console.log(genreId);
     try {
       const moviesData = await MovieApiRequests.fetchMoviesByGenre(genreId, selectedSort, currentPage);
       setMovies(moviesData.results);
-      onMoviesChange(moviesData.results)
-      console.log(moviesData);
+      onMoviesChange(moviesData.results);
       setSelectedGenre(genreId);
-      setSelectedSort(sortOption);
-      onSortChange(sortOption);
-      setCurrentPage(1);
 
-      // Se llama a la función proporcionada desde las propiedades para notificar a App.jsx del cambio de género
       if (genreId) {
         onGenreChange(genreId);
       }
@@ -57,9 +48,10 @@ const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange }) => {
 
   const handleSortChange = async (sortOption) => {
     try {
-      const moviesData = await MovieApiRequests.fetchMoviesByGenre(selectedGenre, sortOption);
+      const moviesData = await MovieApiRequests.fetchMoviesByGenre(selectedGenre, sortOption, currentPage);
       setMovies(moviesData.results);
       setSelectedSort(sortOption);
+      onSortChange(sortOption);
     } catch (error) {
       console.error('Error fetching movies:', error);
     }
@@ -67,7 +59,7 @@ const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange }) => {
 
   const handleClearFilters = async () => {
     try {
-      const moviesData = await MovieApiRequests.fetchMoviesByGenre('', selectedSort);
+      const moviesData = await MovieApiRequests.fetchMoviesByGenre('', selectedSort, currentPage);
       setMovies(moviesData.results);
       setSelectedGenre('');
     } catch (error) {
@@ -87,7 +79,7 @@ const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange }) => {
       </select>
       {/* Botón para limpiar filtros */}
       <button onClick={handleClearFilters}>Limpiar Filtro</button>
-
+  
       {/* Dropdown para ordenamiento */}
       <select value={selectedSort} onChange={(e) => handleSortChange(e.target.value)}>
         <option value="popularity.desc">Más popular</option>
@@ -96,15 +88,15 @@ const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange }) => {
         <option value="release_date.asc">Fecha de lanzamiento (ascendente)</option>
         {/* Otras opciones de ordenamiento */}
       </select>
-
-      {/* Resultados de películas */}
-      {/* <MovieGrid movies={movies} /> */}
+  
+      
     </div>
   );
 };
-
 MovieSearch.propTypes = {
   onGenreChange: PropTypes.func.isRequired,
+  onMoviesChange: PropTypes.func.isRequired,
+  onSortChange: PropTypes.func.isRequired,
 };
 
 export default MovieSearch;
