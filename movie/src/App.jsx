@@ -25,7 +25,7 @@ function App() {
   // sortOption es una cadena que indica la opción de ordenación de las películas
   // setSortOption es una función que permite actualizar el estado de sortOption
  
-  const fetchData = async (page, genre, sort) => {
+  const fetchData = async (genre, page, sort) => {
     // Definimos la función fetchData que se encarga de obtener los datos de la API de películas
   // Recibe como parámetros la página, el género y la opción de ordenación
     try {
@@ -66,10 +66,11 @@ function App() {
   };
 
   useEffect(() => {
+    console.log(currentPage, selectedGenre, sortOption, "useEffect1");
     // Usamos el hook useEffect para ejecutar la función fetchData cada vez que cambien los valores de currentPage, selectedGenre o sortOption
   // De esta forma, se actualizan los datos de la API según los criterios de búsqueda y ordenación
-    fetchData(currentPage, selectedGenre, sortOption);
-  }, [currentPage, selectedGenre, sortOption]);
+    fetchData(selectedGenre, sortOption, currentPage);
+  }, [selectedGenre, sortOption, currentPage]);
 
   // Retornamos el JSX que representa la interfaz de la aplicación
   return (

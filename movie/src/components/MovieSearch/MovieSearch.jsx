@@ -51,7 +51,7 @@ const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange, currentPage 
           setSelectedGenre(allGenres[0].id.toString());
            // Actualizamos el estado de selectedGenre con el id del 
            //primer elemento de allGenres, convertido a cadena
-          const moviesData = await MovieApiRequests.fetchMoviesByGenre(allGenres[0].id, selectedSort, currentPage);
+          const moviesData = await MovieApiRequests.fetchMoviesByGenre(allGenres[0].id, currentPage, selectedSort);
           onMoviesChange(moviesData.results);
            // Llamamos a la función fetchMoviesByGenre del módulo MovieApiRequests
           // Le pasamos como argumentos el id del primer elemento de allGenres, la opción de ordenación seleccionada y la página actual
@@ -98,6 +98,7 @@ const MovieSearch = ({ onGenreChange, onMoviesChange, onSortChange, currentPage 
   };
 
   const handleSortChange = async (sortOption) => {
+  console.log(sortOption, "101");
     // Definimos la función handleSortChange que se encarga de manejar el cambio de ordenación
   // Recibe como parámetro la opción de ordenación que se quiere aplicar, se supone que sortOption el propm de la ordenacion
     try {
