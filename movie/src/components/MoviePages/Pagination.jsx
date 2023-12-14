@@ -1,6 +1,10 @@
 import PropTypes from "prop-types";
 import "./buttonPage.css";
 
+//tres propiedades: currentPage(página actual), 
+//totalPages(úmero total de páginas) 
+//onPageChange(función que se ejecuta cuando se cambia de página). 
+
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const maxVisiblePages = 10;
   const halfVisiblePages = Math.floor(maxVisiblePages / 2);

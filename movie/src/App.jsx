@@ -43,14 +43,13 @@ function App() {
 
   const handleSortChange = (sortOption) => {
     setSortOption(sortOption);
-    fetchData(selectedGenre, sortOption, );
+    fetchData(selectedGenre, sortOption);
   };
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
+    fetchData(selectedGenre, sortOption, page);
   };
-
-  
 
   const handleClear = (genreId) => {
     setSelectedGenre(genreId);
@@ -79,7 +78,6 @@ function App() {
         onPageChange={handlePageChange}
       />
     </div>
-    
   );
 }
 
