@@ -1,6 +1,5 @@
 // Definimos el componente MovieSearch que permite buscar películas por género y ordenarlas por popularidad o fecha
 import { useState, useEffect } from "react";
-import MovieApiRequests from "../../services/MovieApiRequests";
 import "./MovieSearch.css";
 import PropTypes from "prop-types";
 

@@ -44,11 +44,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
 Pagination.propTypes = {
   currentPage: PropTypes.number.isRequired,
-  
   totalPages: PropTypes.number.isRequired,
- 
   onPageChange: PropTypes.func.isRequired,
-  // onPageChange es una función que se encarga de actualizar el estado y los datos del componente padre App según la página seleccionada
+ 
 };
 
 export default Pagination;

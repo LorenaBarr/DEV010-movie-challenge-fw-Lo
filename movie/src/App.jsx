@@ -8,28 +8,32 @@ import "./App.css";
 
 function App() {
   const [movies, setMovies] = useState([]);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   const [selectedGenre, setSelectedGenre] = useState("");
   const [sortOption, setSortOption] = useState("popularity.desc");
   const [list, setList] = useState([]);
 
   async function getGenresList() {
     const genreOptions = await MovieApiRequests.fetchGenres();
-    console.log(genreOptions);
 
     const allGenres = [{ id: "", name: "Todo" }, ...genreOptions];
     setList(allGenres);
-
-    
+    setTotalPages(allGenres.totalPages);
   }
 
   async function fetchData(genreId, sortOption, page) {
-    console.log(genreId);
-    const data = await MovieApiRequests.fetchMovies(genreId, sortOption, page);
-    setMovies(data.results);
-    console.log(data);
-    //hacer el try
+    try {
+      const data = await MovieApiRequests.fetchMovies(
+        genreId,
+        sortOption,
+        page
+      );
+      setMovies(data.results);
+      setTotalPages(data.totalPages);
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+    }
   }
 
   const handleGenreChange = (genreId) => {
@@ -39,21 +43,25 @@ function App() {
 
   const handleSortChange = (sortOption) => {
     setSortOption(sortOption);
-    fetchData(selectedGenre, sortOption, 1);
+    fetchData(selectedGenre, sortOption, );
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
   };
 
   
 
   const handleClear = (genreId) => {
     setSelectedGenre(genreId);
-    fetchData(selectedGenre, sortOption, 1);
+    fetchData(selectedGenre, sortOption, currentPage);
   };
 
   useEffect(() => {
-    fetchData(selectedGenre, sortOption, 1);
+    fetchData(selectedGenre, sortOption, currentPage);
     getGenresList();
     // fetchData(selectedGenre, sortOption, currentPage);
-  }, [selectedGenre, sortOption]);
+  }, [selectedGenre, sortOption, currentPage]);
 
   return (
     <div>
@@ -65,10 +73,13 @@ function App() {
         onListChange={list}
       />
       <MovieGrid movies={movies} />
-
-      {/* <Pagination  /> */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
-    // Pasamos los estados currentPage y totalPages y la función handlePageChange como props al componente Pagination
+    
   );
 }
 
