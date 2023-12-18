@@ -6,6 +6,13 @@ import MovieApiRequests from '../../src/services/MovieApiRequests';
 
 jest.mock('../../src/services/MovieApiRequests');
 
+
+const mockFunctions = {
+  onGenreChange: jest.fn(),
+  onSortChange: jest.fn(),
+  onListChange: jest.fn(),
+  onClear: jest.fn(),
+};
 const mockGenres = [
   { id: 1, name: 'Todo' },
   { id: 2, name: 'Genre 2' },

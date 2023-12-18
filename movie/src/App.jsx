@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 //los hooks useState y useEffect de React para manejar el estado y los efectos de la aplicación
 import MovieGrid from "./components/MovieGrid/MovieGrid";
 import Pagination from "./components/MoviePages/Pagination";
@@ -38,7 +39,7 @@ function App() {
 
   const handleGenreChange = (genreId) => {
     setSelectedGenre(genreId);
-    fetchData(selectedGenre, sortOption, 1);
+    fetchData(selectedGenre, sortOption, currentPage);
   };
 
   const handleSortChange = (sortOption) => {

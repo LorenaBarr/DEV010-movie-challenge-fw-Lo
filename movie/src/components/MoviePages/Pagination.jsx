@@ -13,7 +13,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const pageNumbers = Array.from(
     { length: endPage - startPage + 1 },
     (_, index) => startPage + index
+    
   );
+  console.log(currentPage, totalPages);
   return (
     <div id="pagination">
       <button onClick={() => onPageChange(1)} disabled={currentPage === 1}>
