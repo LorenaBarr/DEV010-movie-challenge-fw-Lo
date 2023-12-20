@@ -1,8 +1,7 @@
 .movie-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr); /* Definir 5 columnas */
-    gap: 16px;
-    background-color: #0B032D;
-  }
-  
- 
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  /* Definir 5 columnas */
+  gap: 16px;
+  background-color: #0B032D;
+}

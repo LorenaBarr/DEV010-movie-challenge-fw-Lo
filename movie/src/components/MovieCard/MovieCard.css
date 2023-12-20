@@ -1,37 +1,37 @@
 .movie-card {
-    border: 1px solid #F67E7D;
-    border-radius: 8px;
-    overflow: hidden;
-    margin: 16px;
-    padding: 16px;
-    box-shadow: 0 4px 8px #F67E7D;
-    transition: transform 0.3s ease-in-out;
-    color: aliceblue;
-    text-align: center;
-    
-  
-    &:hover {
-      transform: scale(1.05);
-    }
+  border: 1px solid #F67E7D;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px #F67E7D;
+  transition: transform 0.3s ease-in-out;
+  color: aliceblue;
+  text-align: center;
+
+
+  &:hover {
+    transform: scale(1.05);
   }
-  
-  .movie-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 8px;
-  }
-  
-  .movie-details {
-    text-align: center;
-  }
-  
-  .movie-details h2 {
-    margin: 0;
-    font-size: 1.2rem;
-  }
-  
-  .movie-details p {
-    margin: 0;
-    color: #888;
-  }
+}
+
+.movie-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.movie-details {
+  text-align: center;
+}
+
+.movie-details h2 {
+  margin: 0;
+  padding: 1 rem;
+  font-size: 1.2rem;
+}
+
+.movie-details p {
+  margin: -10px;
+
+  color: #888;
+}
