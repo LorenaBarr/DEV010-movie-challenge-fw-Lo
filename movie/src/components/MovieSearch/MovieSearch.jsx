@@ -70,7 +70,7 @@ MovieSearch.propTypes = {
   onListChange: PropTypes.array.isRequired,
   onClear: PropTypes.func.isRequired,
 
-  // currentPage: PropTypes.number.isRequired
+  
 };
 
 export default MovieSearch;
