@@ -1,13 +1,17 @@
 .movie-search {
-    
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-  
-  select {
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    margin: 20px;
-  }
+
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+select {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 20px;
+  background-color: #0B032D;
+  color: #F67E7D;
+  box-shadow: 0 4px 8px #F67E7D;
+
+}

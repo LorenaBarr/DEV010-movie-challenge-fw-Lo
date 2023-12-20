@@ -1,7 +1,14 @@
 div#pagination {
-    display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   background-color: #0B032D;
-  
+  margin-top: 5px;
+  padding-top: 10px;
+  ;
+
+  .page {
+    margin: 0;
+    padding: auto;
+  }
 }

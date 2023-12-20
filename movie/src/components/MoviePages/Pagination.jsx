@@ -18,10 +18,10 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   console.log(currentPage, totalPages);
   return (
     <div id="pagination">
-      <button onClick={() => onPageChange(1)} disabled={currentPage === 1}>
+      <button className="page" onClick={() => onPageChange(1)} disabled={currentPage === 1}>
         First
       </button>
-      <button
+      <button className="page"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
       >
@@ -29,7 +29,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       </button>
 
       {pageNumbers.map((number) => (
-        <button
+        <button className="page"
           key={number}
           onClick={() => onPageChange(number)}
           disabled={number === currentPage}
@@ -38,7 +38,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         </button>
       ))}
 
-      <button
+      <button className="page"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
