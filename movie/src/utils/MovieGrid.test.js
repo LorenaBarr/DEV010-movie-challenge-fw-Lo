@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import MovieGrid from '../components/MovieGrid/MovieGrid';
+import { getByText } from '@testing-library/dom';
 
 const mockMovies = [
   { id: 1, poster_path: '/path1.jpg', original_title: 'Movie 1', release_date: '2023-01-01' },

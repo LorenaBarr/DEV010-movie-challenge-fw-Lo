@@ -8,6 +8,7 @@ import MovieApiRequests from "./services/MovieApiRequests";
 import "./App.css";
 
 function App() {
+  //Declaración de Estados con useState
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -15,6 +16,7 @@ function App() {
   const [sortOption, setSortOption] = useState("popularity.desc");
   const [list, setList] = useState([]);
 
+  //Definición de Función Asíncrona para Obtener Lista de Géneros
   async function getGenresList() {
     const genreOptions = await MovieApiRequests.fetchGenres();
 
@@ -22,7 +24,7 @@ function App() {
     setList(allGenres);
     setTotalPages(allGenres.totalPages);
   }
-
+  //Definición de Función Asíncrona para Obtener Películas
   async function fetchData(genreId, sortOption, page) {
     try {
       const data = await MovieApiRequests.fetchMovies(
@@ -36,7 +38,8 @@ function App() {
       console.error("Error fetching movies:", error);
     }
   }
-
+//Manejo de Cambios de Género, Orden y Página
+//funciones de manjeo de eventos y se actualizan al estado
   const handleGenreChange = (genreId) => {
     setSelectedGenre(genreId);
     fetchData(selectedGenre, sortOption, currentPage);
@@ -56,13 +59,15 @@ function App() {
     setSelectedGenre(genreId);
     fetchData(selectedGenre, sortOption, currentPage);
   };
-
+//Efecto Secundario con useEffect
+//Se utiliza el hook useEffect para ejecutar las funciones fetchData y getGenresList cuando cambian los estados de selectedGenre, sortOption o currentPage. Esto simula el ciclo de vida 
   useEffect(() => {
     fetchData(selectedGenre, sortOption, currentPage);
     getGenresList();
-    // fetchData(selectedGenre, sortOption, currentPage);
+    
   }, [selectedGenre, sortOption, currentPage]);
 
+  //Renderización del Componente
   return (
     <div>
       <h1>Movies</h1>
@@ -81,5 +86,5 @@ function App() {
     </div>
   );
 }
-
+//onGenreChange, onClear, onSortChange, y onListChange son propiedades (props) que se están pasando al componente MovieSearch. Las props son utilizadas para pasar datos y funciones entre componentes en React.
 export default App;

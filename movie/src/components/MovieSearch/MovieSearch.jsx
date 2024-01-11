@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import "./MovieSearch.css";
 import PropTypes from "prop-types";
-
+//Se define el componente funcional MovieSearch que recibe las props: onGenreChange, onSortChange, onListChange, y onClear.
 const MovieSearch = ({
   onGenreChange,
   onSortChange,
@@ -11,22 +11,22 @@ const MovieSearch = ({
 }) => {
   const [selectedGenre, setSelectedGenre] = useState(1);
   const [selectedSort, setSelectedSort] = useState("popularity.desc");
-
+//Se definen dos estados locales selectedGenre y selectedSort utilizando el hook useState.
   const handleGenreChange = (genreId) => {
     onGenreChange(genreId);
     setSelectedGenre(genreId);
   };
-
+//Se ejecuta cuando cambia la selección del género. Llama a la función onGenreChange pasando el nuevo genreId y actualiza el estado local selectedGenre.
   const handleSortChange = (sortOption) => {
     onSortChange(sortOption);
     setSelectedSort(sortOption);
   };
-
+//Se ejecuta cuando cambia la selección de ordenamiento. Llama a la función onSortChange pasando la nueva opción de ordenamiento y actualiza el estado local selectedSort.
   const handleClearFilters = () => {
     onClear(onListChange[0]);
     setSelectedGenre(onListChange[0]);
   };
-
+//Se ejecuta al hacer clic en el botón "Limpiar Filtro". Llama a la función onClear pasando la primera opción de la lista de géneros y actualiza el estado local selectedGenre.
   // Retornamos el JSX que representa la interfaz del componente MovieSearch
   return (
     <div className="movie-search">

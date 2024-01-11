@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1703008418539" clover="3.2.0">
-  <project timestamp="1703008418539" name="All files">
-    <metrics statements="100" coveredstatements="39" conditionals="10" coveredconditionals="3" methods="32" coveredmethods="13" elements="142" coveredelements="55" complexity="0" loc="100" ncloc="100" packages="9" files="10" classes="10"/>
+<coverage generated="1703097859578" clover="3.2.0">
+  <project timestamp="1703097859579" name="All files">
+    <metrics statements="104" coveredstatements="43" conditionals="17" coveredconditionals="10" methods="33" coveredmethods="12" elements="154" coveredelements="65" complexity="0" loc="104" ncloc="104" packages="9" files="10" classes="10"/>
     <package name="src">
       <metrics statements="32" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="0"/>
       <file name="App.jsx" path="C:\Users\LOREN\Moviechallenge\DEV010-movie-challenge-fw-Lo\movie\src\App.jsx">
@@ -44,12 +44,17 @@
       </file>
     </package>
     <package name="src.components.MovieCard">
-      <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <metrics statements="8" coveredstatements="8" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
       <file name="MovieCard.jsx" path="C:\Users\LOREN\Moviechallenge\DEV010-movie-challenge-fw-Lo\movie\src\components\MovieCard\MovieCard.jsx">
-        <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
-        <line num="27" count="3" type="stmt"/>
+        <metrics statements="8" coveredstatements="8" conditionals="6" coveredconditionals="6" methods="2" coveredmethods="2"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="6" count="5" type="cond" truecount="4" falsecount="0"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
       </file>
     </package>
     <package name="src.components.MovieDetails">
@@ -61,13 +66,13 @@
       </file>
     </package>
     <package name="src.components.MovieGrid">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <metrics statements="4" coveredstatements="4" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
       <file name="MovieGrid.jsx" path="C:\Users\LOREN\Moviechallenge\DEV010-movie-challenge-fw-Lo\movie\src\components\MovieGrid\MovieGrid.jsx">
-        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <metrics statements="4" coveredstatements="4" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
         <line num="5" count="2" type="stmt"/>
-        <line num="7" count="3" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.components.MovieList">
@@ -75,7 +80,7 @@
       <file name="MovieList.jsx" path="C:\Users\LOREN\Moviechallenge\DEV010-movie-challenge-fw-Lo\movie\src\components\MovieList\MovieList.jsx">
         <metrics statements="11" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
         <line num="5" count="1" type="stmt"/>
-        <line num="6" count="2" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
         <line num="8" count="2" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
@@ -88,9 +93,9 @@
       </file>
     </package>
     <package name="src.components.MoviePages">
-      <metrics statements="15" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="4"/>
+      <metrics statements="14" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="4"/>
       <file name="Pagination.jsx" path="C:\Users\LOREN\Moviechallenge\DEV010-movie-challenge-fw-Lo\movie\src\components\MoviePages\Pagination.jsx">
-        <metrics statements="15" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="4"/>
+        <metrics statements="14" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="4"/>
         <line num="8" count="1" type="stmt"/>
         <line num="9" count="2" type="stmt"/>
         <line num="10" count="2" type="stmt"/>
@@ -99,50 +104,49 @@
         <line num="13" count="2" type="stmt"/>
         <line num="15" count="20" type="stmt"/>
         <line num="18" count="2" type="stmt"/>
-        <line num="19" count="2" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="32" count="20" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
-        <line num="51" count="1" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="36" count="20" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="57" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.components.MovieSearch">
-      <metrics statements="17" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="3"/>
+      <metrics statements="17" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="1"/>
       <file name="MovieSearch.jsx" path="C:\Users\LOREN\Moviechallenge\DEV010-movie-challenge-fw-Lo\movie\src\components\MovieSearch\MovieSearch.jsx">
-        <metrics statements="17" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="3"/>
+        <metrics statements="17" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="1"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="12" count="4" type="stmt"/>
-        <line num="13" count="4" type="stmt"/>
-        <line num="15" count="4" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
-        <line num="20" count="4" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
         <line num="22" count="0" type="stmt"/>
-        <line num="25" count="4" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
-        <line num="27" count="1" type="stmt"/>
-        <line num="31" count="4" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
-        <line num="39" count="3" type="stmt"/>
+        <line num="39" count="0" type="stmt"/>
         <line num="50" count="0" type="stmt"/>
         <line num="67" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.services">
-      <metrics statements="14" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="14" coveredstatements="3" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="MovieApiRequests.js" path="C:\Users\LOREN\Moviechallenge\DEV010-movie-challenge-fw-Lo\movie\src\services\MovieApiRequests.js">
-        <metrics statements="14" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
+        <metrics statements="14" coveredstatements="3" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
-        <line num="24" count="0" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
